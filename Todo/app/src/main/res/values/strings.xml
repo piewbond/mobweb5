@@ -16,4 +16,8 @@
     <string name="app_bar_title_create_todo">Create excercise</string>
     <string name="some_error_message">Error</string>
     <string name="priority_title_none">none</string>
+    <string name="reminders_notification_channel_id">reminders_notification_channel_id</string>
+    <string name="title_notification_reminder">It\'s time to excercise</string>
+    <string name="description_notification_reminder">Don\'t forget to workout today!</string>
+    <string name="reminders_notification_channel_name">reminders_notification_channel_name</string>
 </resources>

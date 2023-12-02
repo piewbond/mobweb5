@@ -1,5 +1,6 @@
 package hu.bme.aut.android.jot.feature.todo_create
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -96,7 +97,7 @@ fun TodoCreateScreen(
                 priorities = Priority.values().map { it.asPriorityUi() },
                 selectedPriority = state.todo.priority,
                 onPrioritySelected = { viewModel.onEvent(TodoCreateEvent.SelectPriority(it)) },
-                modifier = Modifier
+                modifier = Modifier.background(MaterialTheme.colorScheme.background)
             )
         }
     }

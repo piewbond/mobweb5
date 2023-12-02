@@ -1,6 +1,7 @@
 package hu.bme.aut.android.jot.ui.common
 
 import android.preference.PreferenceManager
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -38,9 +39,8 @@ fun HomeTopAppbar(
     modifier: Modifier = Modifier,
     title: String,
     actions: @Composable() (RowScope.() -> Unit) = {},
-    onNavigateBack: () -> Unit,
-    onDelete: () -> Unit,
-    onThemeUpdated: () -> Unit
+    onThemeUpdated: () -> Unit,
+    onSetNotification: () -> Unit
 ) {
     // fetching local context
     val mContext = LocalContext.current
@@ -117,7 +117,7 @@ fun HomeTopAppbar(
                         checked = notificationsOn,
                         onCheckedChange = {
                             notificationsOn = it
-                            prefs.edit().putBoolean("notificationsOn", darkmodeOn).apply()
+                            prefs.edit().putBoolean("notificationsOn", notificationsOn).apply()
                         }
                     )
                     Spacer(modifier = Modifier.size(10.dp))
@@ -127,14 +127,14 @@ fun HomeTopAppbar(
 
                 Row {
                     Spacer(modifier = Modifier.size(5.dp))
-                    TextButton(onClick = {})
+                    TextButton(onClick = {
+                        mDisplayMenu = false
+                        onSetNotification.invoke()
+                    })
                     {
                         Text(text = "Set notification time", fontSize =  16.sp, modifier = Modifier
                             .align(Alignment.CenterVertically))
-
                     }
-
-
                     Spacer(modifier = Modifier.size(20.dp))
                 }
 
@@ -155,8 +155,7 @@ fun HomeTopAppbar_Preview() {
     HomeTopAppbar(
         title = "Title",
         actions = {},
-        onNavigateBack = {},
-        onDelete = {},
+        onSetNotification = {},
         onThemeUpdated = {}
     )
 }
