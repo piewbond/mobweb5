@@ -75,6 +75,28 @@ fun TodoEditor(
             )
         }
         Spacer(modifier = Modifier.height(5.dp))
+        PriorityDropDown(
+            priorities = priorities,
+            selectedPriority = selectedPriority,
+            onPrioritySelected = onPrioritySelected,
+            modifier = Modifier
+                .fillMaxWidth(fraction),
+            enabled = enabled
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Button( modifier = Modifier
+            .padding(bottom = 5.dp)
+            .padding(start = 10.dp)
+            .align(Alignment.Start),
+            enabled = enabled,
+            onClick = {}
+        ) {
+            Icon(Icons.Default.AddCircle, contentDescription = null)
+            Spacer(modifier = Modifier.width(10.dp))
+            Text("Add new Task")
+        }
+        Spacer(modifier = Modifier.height(5.dp))
         NormalTextField(
             value = descriptionValue,
             label = stringResource(id = R.string.textfield_label_description),
@@ -87,28 +109,6 @@ fun TodoEditor(
                 .padding(bottom = 5.dp),
             enabled = enabled
         )
-        Spacer(modifier = Modifier.height(5.dp))
-        PriorityDropDown(
-            priorities = priorities,
-            selectedPriority = selectedPriority,
-            onPrioritySelected = onPrioritySelected,
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth(fraction),
-            enabled = enabled
-        )
-        Spacer(modifier = Modifier.height(5.dp))
-
-        Button( modifier = Modifier
-                .fillMaxWidth(fraction)
-                .padding(bottom = 5.dp),
-                enabled = enabled,
-                onClick = {}
-        ) {
-                Icon(Icons.Default.AddCircle, contentDescription = null)
-                Text("a")
-        }
-
 
     }
 }

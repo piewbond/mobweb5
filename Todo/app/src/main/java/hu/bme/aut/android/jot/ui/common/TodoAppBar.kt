@@ -44,7 +44,7 @@ fun TodoAppBar(
             val context = LocalContext.current
             IconButton(onClick = {
 
-                Toast.makeText(context, "deleted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Excercise deleted", Toast.LENGTH_SHORT).show()
                 onDelete.invoke()
                 onNavigateBack.invoke()
 

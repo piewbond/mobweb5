@@ -12,6 +12,7 @@
     <string name="text_null_todo_list">Null response</string>
     <string name="text_your_todo_list">Your excercises</string>
     <string name="app_bar_title_edit_todo">Edit excercise</string>
+    <string name="app_bar_title_list_excercise">JOT your exercises</string>
     <string name="app_bar_title_create_todo">Create excercise</string>
     <string name="some_error_message">Error</string>
     <string name="priority_title_none">none</string>

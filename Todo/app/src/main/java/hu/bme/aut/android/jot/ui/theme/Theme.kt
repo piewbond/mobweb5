@@ -2,6 +2,7 @@ package hu.bme.aut.android.jot.ui.theme
 
 import android.app.Activity
 import android.os.Build
+import android.preference.PreferenceManager
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -44,13 +45,21 @@ fun JotTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    val prefs = PreferenceManager.getDefaultSharedPreferences(LocalContext.current)
+
+    var darkmode = darkTheme
+    if (prefs.contains("darkmodeOn")) {
+        darkmode = prefs.getBoolean("darkmodeOn",false)
+    }
+
+
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            if (darkmode) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
+        darkmode -> DarkColorScheme
         else -> LightColorScheme
     }
     val view = LocalView.current

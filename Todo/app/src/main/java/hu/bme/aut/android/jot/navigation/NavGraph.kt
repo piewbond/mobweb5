@@ -14,7 +14,9 @@ import hu.bme.aut.android.jot.feature.todo_list.TodoListScreen
 @Composable
 fun NavGraph(
     navController: NavHostController = rememberNavController(),
-) {
+    onThemeUpdated: () -> Unit,
+
+    ) {
     NavHost(
         navController = navController,
         startDestination = Screen.TodoList.route
@@ -26,7 +28,8 @@ fun NavGraph(
                 },
                 onFabClick = {
                     navController.navigate(Screen.TodoCreate.route)
-                }
+                },
+                onThemeUpdated = onThemeUpdated
             )
         }
         composable(

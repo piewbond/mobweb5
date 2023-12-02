@@ -3,7 +3,6 @@ package hu.bme.aut.android.jot.feature.todo_list
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -30,12 +29,12 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hu.bme.aut.android.jot.R
+import hu.bme.aut.android.jot.ui.common.HomeTopAppbar
 import hu.bme.aut.android.jot.ui.model.toUiText
 
 @Composable
@@ -45,6 +44,7 @@ fun TodoListScreen(
     onListItemClick: (Int) -> Unit,
     onFabClick: () -> Unit,
     viewModel: TodoListViewModel = viewModel(factory = TodoListViewModel.Factory),
+    onThemeUpdated: () -> Unit,
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
     val context = LocalContext.current
@@ -72,6 +72,14 @@ fun TodoListScreen(
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = null)
             }
+        },
+        topBar = {
+            HomeTopAppbar(
+                title = stringResource(id = R.string.app_bar_title_list_excercise),
+                onNavigateBack = {},
+                onDelete = {},
+                onThemeUpdated = onThemeUpdated
+            )
         }
     ) {
         Box(
@@ -98,11 +106,7 @@ fun TodoListScreen(
                     if (state.todoList.isEmpty()) {
                         Text(text = stringResource(id = R.string.text_empty_todo_list))
                     } else {
-                        Column {
-                            Text(
-                                text = stringResource(id = R.string.text_your_todo_list),
-                                fontSize = 24.sp
-                            )
+
                             LazyColumn(
                                 modifier = Modifier
                                     .fillMaxSize()
@@ -148,7 +152,7 @@ fun TodoListScreen(
                                     }
                                 }
                             }
-                        }
+
                     }
                 }
             }
