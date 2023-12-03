@@ -27,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hu.bme.aut.android.jot.R
 import hu.bme.aut.android.jot.domain.model.Priority
+import hu.bme.aut.android.jot.ui.common.CreateTaskDialog
 import hu.bme.aut.android.jot.ui.common.DatePickerDialog
 import hu.bme.aut.android.jot.ui.common.TodoAppBar
 import hu.bme.aut.android.jot.ui.common.TodoEditor
@@ -64,6 +65,8 @@ fun TodoCreateScreen(
         }
     }
 
+
+
     Scaffold(
         snackbarHost = { SnackbarHost(hostState) },
         topBar = {
@@ -82,7 +85,8 @@ fun TodoCreateScreen(
                 Icon(imageVector = Icons.Default.Save, contentDescription = null)
             }
         }
-    ) { padding ->
+    ) {
+            padding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -97,8 +101,10 @@ fun TodoCreateScreen(
                 priorities = Priority.values().map { it.asPriorityUi() },
                 selectedPriority = state.todo.priority,
                 onPrioritySelected = { viewModel.onEvent(TodoCreateEvent.SelectPriority(it)) },
-                modifier = Modifier.background(MaterialTheme.colorScheme.background)
+                modifier = Modifier.background(MaterialTheme.colorScheme.background),
+                onCreateTaskPressed = {showDialog = !showDialog}
             )
         }
+        CreateTaskDialog(timePickerOn = showDialog, onCloseDialog = {showDialog = false})
     }
 }

@@ -1,12 +1,10 @@
 package hu.bme.aut.android.jot.ui.common
 
-import android.graphics.Paint.Align
-import android.widget.Toast
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,17 +13,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TimePicker
-import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,10 +32,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import hu.bme.aut.android.jot.R
+import hu.bme.aut.android.jot.domain.model.Task
 import hu.bme.aut.android.jot.ui.model.PriorityUi
 import kotlinx.datetime.LocalDate
 import java.time.LocalDateTime
 
+@SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun TodoEditor(
@@ -52,6 +49,7 @@ fun TodoEditor(
     priorities: List<PriorityUi> = listOf(PriorityUi.Low, PriorityUi.Medium, PriorityUi.High),
     selectedPriority: PriorityUi,
     onPrioritySelected: (PriorityUi) -> Unit,
+    onCreateTaskPressed: () -> Unit,
     enabled: Boolean = true,
 ) {
     val fraction = 0.95f
@@ -88,16 +86,28 @@ fun TodoEditor(
         )
         Spacer(modifier = Modifier.height(5.dp))
 
+        val tasks = mutableStateListOf<Task>(
+            Task(title = "abs",id = 0, weight = "54kg"),
+            Task(title = "abs",id = 0, weight = "54kg"),
+            Task(title = "abs",id = 0, weight = "54kg"))
+        Box(modifier = Modifier
+            .weight(1f)
+        ) {
+            TaskList(tasks)
+        }
         Button( modifier = Modifier
             .padding(bottom = 5.dp)
             .padding(start = 10.dp)
             .align(Alignment.Start),
             enabled = enabled,
-            onClick = {}
+            onClick = {
+                onCreateTaskPressed.invoke()
+            }
         ) {
             Icon(Icons.Default.AddCircle, contentDescription = null)
             Spacer(modifier = Modifier.width(10.dp))
             Text("Add new Task")
+            tasks.add(Task(title = "new abs",id = 0, weight = "54kg"))
         }
         Spacer(modifier = Modifier.height(5.dp))
         NormalTextField(
@@ -136,7 +146,8 @@ fun TodoEditor_Preview() {
             descriptionOnValueChange = { description = it },
             priorities = priorities,
             selectedPriority = selectedPriority,
-            onPrioritySelected = { selectedPriority = it }
+            onPrioritySelected = { selectedPriority = it },
+            onCreateTaskPressed = {}
         )
     }
 }
