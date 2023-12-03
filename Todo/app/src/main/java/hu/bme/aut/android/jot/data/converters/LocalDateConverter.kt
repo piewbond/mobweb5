@@ -14,7 +14,7 @@ object LocalDateConverter {
     fun String.asLocalDateTime(): LocalDate = this.toLocalDate()
 }
 
-object TodoPriorityConverter {
+object ExcercisePriorityConverter {
 
     @TypeConverter
     fun Priority.asString(): String = this.name

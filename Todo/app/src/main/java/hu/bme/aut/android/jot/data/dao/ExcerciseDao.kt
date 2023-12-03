@@ -9,20 +9,20 @@ import hu.bme.aut.android.jot.data.entities.TodoEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TodoDao {
+interface ExcerciseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTodo(todo: TodoEntity)
+    suspend fun insertExcercise(excercise: TodoEntity)
 
     @Query("SELECT * FROM excercise_table")
-    fun getAllTodos(): Flow<List<TodoEntity>>
+    fun getAllExcercises(): Flow<List<TodoEntity>>
 
     @Query("SELECT * FROM excercise_table WHERE id = :id")
-    fun getTodoById(id: Int): Flow<TodoEntity>
+    fun getExcerciseById(id: Int): Flow<TodoEntity>
 
     @Update
-    suspend fun updateTodo(todo: TodoEntity)
+    suspend fun updateExcercise(excercise: TodoEntity)
 
     @Query("DELETE FROM excercise_table WHERE id = :id")
-    suspend fun deleteTodo(id: Int)
+    suspend fun deleteExcercise(id: Int)
 }
