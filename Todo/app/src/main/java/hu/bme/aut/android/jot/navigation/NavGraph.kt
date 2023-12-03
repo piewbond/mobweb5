@@ -7,9 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import hu.bme.aut.android.jot.feature.excercise_create.TodoCreateScreen
-import hu.bme.aut.android.jot.feature.excercise_detail.TodoDetailScreen
-import hu.bme.aut.android.jot.feature.excercise_list.TodoListScreen
+import hu.bme.aut.android.jot.feature.excercise_create.ExcerciseCreateScreen
+import hu.bme.aut.android.jot.feature.excercise_detail.ExcerciseDetailScreen
+import hu.bme.aut.android.jot.feature.excercise_list.ExcerciseListScreen
 
 @Composable
 fun NavGraph(
@@ -19,31 +19,31 @@ fun NavGraph(
     ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.TodoList.route
+        startDestination = Screen.ExcerciseList.route
     ) {
-        composable(Screen.TodoList.route) {
-            TodoListScreen(
+        composable(Screen.ExcerciseList.route) {
+            ExcerciseListScreen(
                 onListItemClick = {
-                    navController.navigate(Screen.TodoDetail.passId(it))
+                    navController.navigate(Screen.ExcerciseDetail.passId(it))
                 },
                 onFabClick = {
-                    navController.navigate(Screen.TodoCreate.route)
+                    navController.navigate(Screen.ExcerciseCreate.route)
                 },
                 onThemeUpdated = onThemeUpdated
             )
         }
         composable(
-            route = Screen.TodoDetail.route,
+            route = Screen.ExcerciseDetail.route,
             arguments = listOf(
                 navArgument("id") {
                     type = NavType.IntType
                 }
             )
         ) {
-            TodoDetailScreen(onNavigateBack = { navController.popBackStack() })
+            ExcerciseDetailScreen(onNavigateBack = { navController.popBackStack() })
         }
-        composable(Screen.TodoCreate.route) {
-            TodoCreateScreen(
+        composable(Screen.ExcerciseCreate.route) {
+            ExcerciseCreateScreen(
                 onNavigateBack = {
                     navController.popBackStack()
                 }

@@ -7,10 +7,10 @@ import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import hu.bme.aut.android.jot.TodoApplication
+import hu.bme.aut.android.jot.ExcerciseApplication
 import hu.bme.aut.android.jot.domain.model.Excercise
 import hu.bme.aut.android.jot.domain.usecases.ExcerciseUseCases
-import hu.bme.aut.android.jot.feature.excercise_create.TodoCreateUiEvent
+import hu.bme.aut.android.jot.feature.excercise_create.ExcerciseCreateUiEvent
 import hu.bme.aut.android.jot.ui.model.ExcerciseUi
 import hu.bme.aut.android.jot.ui.model.asExcerciseUi
 import hu.bme.aut.android.jot.ui.model.toUiText
@@ -20,37 +20,37 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-sealed class TodoDetailState {
-    object Loading : TodoDetailState()
-    data class Error(val error: Throwable) : TodoDetailState()
-    data class Result(val todo: ExcerciseUi) : TodoDetailState()
+sealed class ExcerciseDetailState {
+    object Loading : ExcerciseDetailState()
+    data class Error(val error: Throwable) : ExcerciseDetailState()
+    data class Result(val excerciseUi: ExcerciseUi) : ExcerciseDetailState()
 }
 
-class TodoDetailViewModel(
-    private val todoOperations: ExcerciseUseCases,
+class ExcerciseDetailViewModel(
+    private val excerciseOperations: ExcerciseUseCases,
     private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
-    private val _state = MutableStateFlow<TodoDetailState>(TodoDetailState.Loading)
+    private val _state = MutableStateFlow<ExcerciseDetailState>(ExcerciseDetailState.Loading)
     val state = _state.asStateFlow()
 
-    private val _uiEvent = Channel<TodoCreateUiEvent>()
+    private val _uiEvent = Channel<ExcerciseCreateUiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
-        loadTodos()
+        loadExcercises()
     }
 
-    private fun loadTodos() {
+    private fun loadExcercises() {
         val id = checkNotNull<Int>(savedStateHandle["id"])
         viewModelScope.launch {
             try {
-                _state.value = TodoDetailState.Loading
-                val todo = todoOperations.loadExcercise(id)
-                _state.value = TodoDetailState.Result(
-                    todo = todo.getOrThrow().asExcerciseUi()
+                _state.value = ExcerciseDetailState.Loading
+                val excercise = excerciseOperations.loadExcercise(id)
+                _state.value = ExcerciseDetailState.Result(
+                    excerciseUi = excercise.getOrThrow().asExcerciseUi()
                 )
             } catch (e: Exception) {
-                _state.value = TodoDetailState.Error(e)
+                _state.value = ExcerciseDetailState.Error(e)
             }
         }
     }
@@ -58,10 +58,10 @@ class TodoDetailViewModel(
         val id = checkNotNull<Int>(savedStateHandle["id"])
         viewModelScope.launch {
             try {
-                todoOperations.deleteExcercise(id)
-                _uiEvent.send(TodoCreateUiEvent.Success)
+                excerciseOperations.deleteExcercise(id)
+                _uiEvent.send(ExcerciseCreateUiEvent.Success)
             } catch (e: Exception) {
-                _uiEvent.send(TodoCreateUiEvent.Failure(e.toUiText()))
+                _uiEvent.send(ExcerciseCreateUiEvent.Failure(e.toUiText()))
             }
         }
     }
@@ -69,10 +69,10 @@ class TodoDetailViewModel(
         val id = checkNotNull<Int>(savedStateHandle["id"])
         viewModelScope.launch {
             try {
-                todoOperations.updateExcercise(excercise)
-                _uiEvent.send(TodoCreateUiEvent.Success)
+                excerciseOperations.updateExcercise(excercise)
+                _uiEvent.send(ExcerciseCreateUiEvent.Success)
             } catch (e: Exception) {
-                _uiEvent.send(TodoCreateUiEvent.Failure(e.toUiText()))
+                _uiEvent.send(ExcerciseCreateUiEvent.Failure(e.toUiText()))
             }
         }
     }
@@ -80,10 +80,10 @@ class TodoDetailViewModel(
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val todoOperations = ExcerciseUseCases(TodoApplication.repository)
+                val excerciseOperations = ExcerciseUseCases(ExcerciseApplication.repository)
                 val savedStateHandle = createSavedStateHandle()
-                TodoDetailViewModel(
-                    todoOperations,
+                ExcerciseDetailViewModel(
+                    excerciseOperations,
                     savedStateHandle
                 )
             }

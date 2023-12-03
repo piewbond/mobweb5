@@ -46,9 +46,9 @@ import hu.bme.aut.android.jot.ui.model.toUiText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TodoDetailScreen(
+fun ExcerciseDetailScreen(
     onNavigateBack: () -> Unit,
-    viewModel: TodoDetailViewModel = viewModel(factory = TodoDetailViewModel.Factory)
+    viewModel: ExcerciseDetailViewModel = viewModel(factory = ExcerciseDetailViewModel.Factory)
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
     var showDialog by remember { mutableStateOf(false) }
@@ -57,10 +57,10 @@ fun TodoDetailScreen(
 
     Scaffold(
         topBar = {
-            if (state is TodoDetailState.Result) {
+            if (state is ExcerciseDetailState.Result) {
                 ExcerciseAppBar(
 
-                    title = state.todo.title,
+                    title = state.excerciseUi.title,
                     onNavigateBack = onNavigateBack,
                     onDelete = {
                         viewModel.onDelete()
@@ -76,14 +76,14 @@ fun TodoDetailScreen(
             contentAlignment = Alignment.Center
         ) {
             when (state) {
-                is TodoDetailState.Loading -> CircularProgressIndicator(
+                is ExcerciseDetailState.Loading -> CircularProgressIndicator(
                     color = MaterialTheme.colorScheme.secondaryContainer
                 )
-                is TodoDetailState.Error -> Text(
+                is ExcerciseDetailState.Error -> Text(
                     text = state.error.toUiText().asString(context)
                 )
-                is TodoDetailState.Result -> {
-                    val todo = state.todo
+                is ExcerciseDetailState.Result -> {
+                    val excerciseUi = state.excerciseUi
 
                     CreateTaskDialog(timePickerOn = showDialog, onCloseDialog = {
                         showDialog = false
@@ -93,9 +93,9 @@ fun TodoDetailScreen(
                         val text = prefs.getString("newWeight","")
 
                         if (text != null) {
-                            todo.description = text
+                            excerciseUi.description = text
                         }
-                        viewModel.onEdit(todo.asExcercise())
+                        viewModel.onEdit(excerciseUi.asExcercise())
                     })
 
                     Column(
@@ -114,7 +114,7 @@ fun TodoDetailScreen(
                             Icon(
                                 imageVector = Icons.Default.Circle,
                                 contentDescription = null,
-                                tint = todo.priority.color,
+                                tint = excerciseUi.priority.color,
                                 modifier = Modifier
                                     .size(24.dp)
                             )
@@ -122,12 +122,12 @@ fun TodoDetailScreen(
                             Text(
                                 modifier = Modifier
                                     .weight(weight = 8f),
-                                text = stringResource(id = todo.priority.title),
+                                text = stringResource(id = excerciseUi.priority.title),
                                 style = MaterialTheme.typography.labelMedium
                             )
                         }
                         Text(
-                            todo.description, fontSize = 30.sp
+                            excerciseUi.description, fontSize = 30.sp
                         )
                         Button(
                             onClick = {

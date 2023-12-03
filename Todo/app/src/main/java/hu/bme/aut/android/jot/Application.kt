@@ -11,7 +11,7 @@ import hu.bme.aut.android.jot.data.ExcerciseDatabase
 import hu.bme.aut.android.jot.data.repository.ExcerciseRepositoryImpl
 import hu.bme.aut.android.jot.notification.RemindersManager
 
-class TodoApplication : Application() {
+class ExcerciseApplication : Application() {
 
     companion object {
         private lateinit var db: ExcerciseDatabase

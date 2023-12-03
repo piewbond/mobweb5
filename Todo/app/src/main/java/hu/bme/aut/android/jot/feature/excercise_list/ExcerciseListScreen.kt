@@ -44,10 +44,10 @@ import hu.bme.aut.android.jot.ui.model.toUiText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TodoListScreen(
+fun ExcerciseListScreen(
     onListItemClick: (Int) -> Unit,
     onFabClick: () -> Unit,
-    viewModel: TodoListViewModel = viewModel(factory = TodoListViewModel.Factory),
+    viewModel: ExcerciseListViewModel = viewModel(factory = ExcerciseListViewModel.Factory),
     onThemeUpdated: () -> Unit,
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
@@ -57,7 +57,7 @@ fun TodoListScreen(
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
-                viewModel.loadTodos()
+                viewModel.loadExcercises()
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -107,29 +107,29 @@ fun TodoListScreen(
             contentAlignment = Alignment.Center
         ) {
             when (state) {
-                is TodoListState.Loading -> CircularProgressIndicator(
+                is ExcerciseListState.Loading -> CircularProgressIndicator(
                     color = MaterialTheme.colorScheme.secondaryContainer
                 )
-                is TodoListState.Error -> Text(
+                is ExcerciseListState.Error -> Text(
                     text = state.error.toUiText().asString(context)
                 )
-                is TodoListState.Result -> {
-                    if (state.todoList.isEmpty()) {
-                        Text(text = stringResource(id = R.string.text_empty_todo_list))
+                is ExcerciseListState.Result -> {
+                    if (state.excerciseList.isEmpty()) {
+                        Text(text = stringResource(id = R.string.text_empty_excercise_list))
                     } else {
 
                         LazyColumn(
                             modifier = Modifier
                                 .fillMaxSize()
                         ) {
-                            items(state.todoList, key = { todo -> todo.id }) { todo ->
+                            items(state.excerciseList, key = { excerciseUi -> excerciseUi.id }) { excercise ->
                                 ListItem(
                                     headlineContent = {
                                         Row(verticalAlignment = Alignment.CenterVertically) {
                                             Icon(
                                                 imageVector = Icons.Default.Circle,
                                                 contentDescription = null,
-                                                tint = todo.priority.color,
+                                                tint = excercise.priority.color,
                                                 modifier = Modifier
                                                     .size(40.dp)
                                                     .padding(
@@ -138,16 +138,16 @@ fun TodoListScreen(
                                                         bottom = 8.dp
                                                     ),
                                             )
-                                            Text(text = todo.title)
+                                            Text(text = excercise.title)
                                         }
                                     },
                                     modifier = Modifier.clickable(onClick = {
                                         onListItemClick(
-                                            todo.id
+                                            excercise.id
                                         )
                                     })
                                 )
-                                if (state.todoList.last() != todo) {
+                                if (state.excerciseList.last() != excercise) {
                                     Divider(
                                         thickness = 2.dp,
                                         color = MaterialTheme.colorScheme.secondaryContainer

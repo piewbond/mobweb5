@@ -33,9 +33,9 @@ import hu.bme.aut.android.jot.ui.model.asPriorityUi
 import kotlinx.coroutines.launch
 
 @Composable
-fun TodoCreateScreen(
+fun ExcerciseCreateScreen(
     onNavigateBack: () -> Unit,
-    viewModel: TodoCreateViewModel = viewModel(factory = TodoCreateViewModel.Factory)
+    viewModel: ExcerciseCreateViewModel = viewModel(factory = ExcerciseCreateViewModel.Factory)
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -49,8 +49,8 @@ fun TodoCreateScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { uiEvent ->
             when(uiEvent) {
-                is TodoCreateUiEvent.Success -> { onNavigateBack() }
-                is TodoCreateUiEvent.Failure -> {
+                is ExcerciseCreateUiEvent.Success -> { onNavigateBack() }
+                is ExcerciseCreateUiEvent.Failure -> {
                     scope.launch {
                         hostState.showSnackbar(uiEvent.error.asString(context))
                     }
@@ -67,14 +67,14 @@ fun TodoCreateScreen(
         snackbarHost = { SnackbarHost(hostState) },
         topBar = {
             ExcerciseAppBar(
-                title = stringResource(id = R.string.app_bar_title_create_todo),
+                title = stringResource(id = R.string.app_bar_title_create_excercise),
                 onNavigateBack = onNavigateBack,
                 onDelete = {},
             )
         },
         floatingActionButton = {
             LargeFloatingActionButton(
-                onClick = { viewModel.onEvent(TodoCreateEvent.SaveTodo) },
+                onClick = { viewModel.onEvent(ExcerciseCreateEvent.SaveExcercise) },
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary
             ) {
@@ -90,13 +90,13 @@ fun TodoCreateScreen(
             contentAlignment = Alignment.Center
         ) {
             ExcerciseEditor(
-                titleValue = state.todo.title,
-                titleOnValueChange = { viewModel.onEvent(TodoCreateEvent.ChangeTitle(it)) },
-                descriptionValue = state.todo.description,
-                descriptionOnValueChange = { viewModel.onEvent(TodoCreateEvent.ChangeDescription(it)) },
+                titleValue = state.excerciseUi.title,
+                titleOnValueChange = { viewModel.onEvent(ExcerciseCreateEvent.ChangeTitle(it)) },
+                descriptionValue = state.excerciseUi.description,
+                descriptionOnValueChange = { viewModel.onEvent(ExcerciseCreateEvent.ChangeDescription(it)) },
                 priorities = ExcerciseType.values().map { it.asPriorityUi() },
-                selectedPriority = state.todo.priority,
-                onPrioritySelected = { viewModel.onEvent(TodoCreateEvent.SelectPriority(it)) },
+                selectedPriority = state.excerciseUi.priority,
+                onPrioritySelected = { viewModel.onEvent(ExcerciseCreateEvent.SelectPriority(it)) },
                 modifier = Modifier.background(MaterialTheme.colorScheme.background),
                 onCreateTaskPressed = {showDialog = !showDialog}
             )
