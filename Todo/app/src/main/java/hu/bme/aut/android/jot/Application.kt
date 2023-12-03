@@ -8,7 +8,7 @@ import android.preference.PreferenceManager
 import androidx.core.content.ContextCompat
 import androidx.room.Room
 import hu.bme.aut.android.jot.data.TodoDatabase
-import hu.bme.aut.android.jot.data.repository.TodoRepositoryImpl
+import hu.bme.aut.android.jot.data.repository.ExcerciseRepositoryImpl
 import hu.bme.aut.android.jot.notification.RemindersManager
 
 class TodoApplication : Application() {
@@ -16,7 +16,7 @@ class TodoApplication : Application() {
     companion object {
         private lateinit var db: TodoDatabase
 
-        lateinit var repository: TodoRepositoryImpl
+        lateinit var repository: ExcerciseRepositoryImpl
     }
 
     override fun onCreate() {
@@ -35,7 +35,7 @@ class TodoApplication : Application() {
             "excercise_database"
         ).fallbackToDestructiveMigration().build()
 
-        repository = TodoRepositoryImpl(db.dao)
+        repository = ExcerciseRepositoryImpl(db.dao)
     }
     private fun createNotificationsChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
