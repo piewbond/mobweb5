@@ -10,12 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -86,31 +81,21 @@ fun ExcerciseEditor(
         )
         Spacer(modifier = Modifier.height(5.dp))
 
-        val tasks = mutableStateListOf<Task>(
-            Task(title = "abs",id = 0, weight = "54kg"),
-            Task(title = "abs",id = 0, weight = "54kg"),
-            Task(title = "abs",id = 0, weight = "54kg"))
-        Box(modifier = Modifier
-            .weight(1f)
-        ) {
-            TaskList(tasks)
-        }
-        Button( modifier = Modifier
-            .padding(bottom = 5.dp)
-            .padding(start = 10.dp)
-            .align(Alignment.Start),
-            enabled = enabled,
-            onClick = {
-                onCreateTaskPressed.invoke()
-                tasks.add(Task(title = "new abs",id = 0, weight = "54kg"))
-
-            }
-        ) {
-            Icon(Icons.Default.AddCircle, contentDescription = null)
-            Spacer(modifier = Modifier.width(10.dp))
-            Text("Add new Task")
-        }
-        Spacer(modifier = Modifier.height(5.dp))
+//        Button( modifier = Modifier
+//            .padding(bottom = 5.dp)
+//            .padding(start = 10.dp)
+//            .align(Alignment.Start),
+//            enabled = enabled,
+//            onClick = {
+//                onCreateTaskPressed.invoke()
+//
+//            }
+//        ) {
+//            Icon(Icons.Default.AddCircle, contentDescription = null)
+//            Spacer(modifier = Modifier.width(10.dp))
+//            Text("Add new Task")
+//        }
+//        Spacer(modifier = Modifier.height(5.dp))
         NormalTextField(
             value = descriptionValue,
             label = stringResource(id = R.string.textfield_label_description),

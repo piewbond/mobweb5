@@ -1,5 +1,7 @@
 package hu.bme.aut.android.jot.feature.excercise_detail
 
+import android.preference.PreferenceManager
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import hu.bme.aut.android.jot.TodoApplication
+import hu.bme.aut.android.jot.domain.model.Excercise
 import hu.bme.aut.android.jot.domain.usecases.TodoUseCases
 import hu.bme.aut.android.jot.feature.excercise_create.TodoCreateUiEvent
 import hu.bme.aut.android.jot.ui.model.ExcerciseUi
@@ -58,6 +61,17 @@ class TodoDetailViewModel(
         viewModelScope.launch {
             try {
                 todoOperations.deleteTodo(id)
+                _uiEvent.send(TodoCreateUiEvent.Success)
+            } catch (e: Exception) {
+                _uiEvent.send(TodoCreateUiEvent.Failure(e.toUiText()))
+            }
+        }
+    }
+    fun onEdit(excercise: Excercise) {
+        val id = checkNotNull<Int>(savedStateHandle["id"])
+        viewModelScope.launch {
+            try {
+                todoOperations.updateTodo(excercise)
                 _uiEvent.send(TodoCreateUiEvent.Success)
             } catch (e: Exception) {
                 _uiEvent.send(TodoCreateUiEvent.Failure(e.toUiText()))

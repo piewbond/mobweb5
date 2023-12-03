@@ -2,9 +2,12 @@ package hu.bme.aut.android.jot.feature.excercise_list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -38,8 +41,11 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hu.bme.aut.android.jot.R
+import hu.bme.aut.android.jot.domain.model.Priority
 import hu.bme.aut.android.jot.ui.common.HomeTopAppbar
 import hu.bme.aut.android.jot.ui.common.NotificationTimePicker
+import hu.bme.aut.android.jot.ui.common.PriorityDropDown
+import hu.bme.aut.android.jot.ui.model.PriorityUi
 import hu.bme.aut.android.jot.ui.model.toUiText
 
 @OptIn(ExperimentalMaterial3Api::class)

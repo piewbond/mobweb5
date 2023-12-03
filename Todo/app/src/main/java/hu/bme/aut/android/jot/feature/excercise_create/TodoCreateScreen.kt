@@ -27,7 +27,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hu.bme.aut.android.jot.R
 import hu.bme.aut.android.jot.domain.model.Priority
-import hu.bme.aut.android.jot.ui.common.CreateTaskDialog
 import hu.bme.aut.android.jot.ui.common.ExcerciseAppBar
 import hu.bme.aut.android.jot.ui.common.ExcerciseEditor
 import hu.bme.aut.android.jot.ui.model.asPriorityUi
@@ -70,7 +69,7 @@ fun TodoCreateScreen(
             ExcerciseAppBar(
                 title = stringResource(id = R.string.app_bar_title_create_todo),
                 onNavigateBack = onNavigateBack,
-                onDelete = {}
+                onDelete = {},
             )
         },
         floatingActionButton = {
@@ -102,6 +101,5 @@ fun TodoCreateScreen(
                 onCreateTaskPressed = {showDialog = !showDialog}
             )
         }
-        CreateTaskDialog(timePickerOn = showDialog, onCloseDialog = {showDialog = false})
     }
 }

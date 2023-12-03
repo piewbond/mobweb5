@@ -14,7 +14,7 @@ data class ExcerciseUi(
         LocalDateTime.now().monthValue,
         LocalDateTime.now().dayOfMonth
     ).toString(),
-    val description: String = ""
+    var description: String = ""
 )
 
 fun Excercise.asExcerciseUi(): ExcerciseUi = ExcerciseUi(

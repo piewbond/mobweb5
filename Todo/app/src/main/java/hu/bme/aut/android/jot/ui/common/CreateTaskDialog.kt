@@ -7,15 +7,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TimeInput
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,23 +22,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import hu.bme.aut.android.jot.R
-import hu.bme.aut.android.jot.notification.RemindersManager
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun CreateTaskDialog(
-    timePickerOn : Boolean,
-    onCloseDialog : () -> Unit
+    timePickerOn: Boolean,
+    onCloseDialog: () -> Unit,
+    onConfirm: () -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val fraction = 0.95f
@@ -102,10 +92,7 @@ fun CreateTaskDialog(
                     .padding(top = 12.dp)
                     .fillMaxWidth(),
                     ) {
-                        SimpleTextField(title = "Task name")
-                        SimpleTextField(title = "Task weight")
-
-
+                        SimpleTextField(title = "Task weight",)
                 }
                 // buttons
                 Row(
@@ -125,12 +112,8 @@ fun CreateTaskDialog(
                     // confirm button
                     TextButton(
                         onClick = {
-                            selectedHour = timePickerState.hour
-                            selectedMinute = timePickerState.minute
+                            onConfirm.invoke()
                             onCloseDialog.invoke()
-                            prefs.edit().putInt("selectedHour" , selectedHour).commit()
-                            prefs.edit().putInt("selectedMinute" , selectedMinute).commit()
-                            RemindersManager.startReminder(reminderTime = selectedHour.toString() + ":"+selectedMinute.toString(), context = mContext)
                         }
                     ) {
                         Text(text = "Confirm")
