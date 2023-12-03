@@ -1,9 +1,9 @@
 package hu.bme.aut.android.jot.navigation
 
 sealed class Screen(val route: String) {
-    object TodoList : Screen("todo_list")
-    object TodoDetail : Screen("todo_detail/{id}"){
-        fun passId(id: Int) = "todo_detail/$id"
+    object TodoList : Screen("excercise_list")
+    object TodoDetail : Screen("excercise_detail/{id}"){
+        fun passId(id: Int) = "excercise_detail/$id"
     }
-    object TodoCreate : Screen("todo_create")
+    object TodoCreate : Screen("excercise_create")
 }

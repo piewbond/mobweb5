@@ -1,4 +1,4 @@
-package hu.bme.aut.android.jot.feature.todo_list
+package hu.bme.aut.android.jot.feature.excercise_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

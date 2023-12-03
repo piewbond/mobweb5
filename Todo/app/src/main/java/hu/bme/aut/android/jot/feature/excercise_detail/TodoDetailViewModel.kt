@@ -1,4 +1,4 @@
-package hu.bme.aut.android.jot.feature.todo_detail
+package hu.bme.aut.android.jot.feature.excercise_detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import hu.bme.aut.android.jot.TodoApplication
 import hu.bme.aut.android.jot.domain.usecases.TodoUseCases
-import hu.bme.aut.android.jot.feature.todo_create.TodoCreateUiEvent
+import hu.bme.aut.android.jot.feature.excercise_create.TodoCreateUiEvent
 import hu.bme.aut.android.jot.ui.model.ExcerciseUi
 import hu.bme.aut.android.jot.ui.model.asExcerciseUi
 import hu.bme.aut.android.jot.ui.model.toUiText

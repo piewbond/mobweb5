@@ -1,4 +1,4 @@
-package hu.bme.aut.android.jot.feature.todo_create
+package hu.bme.aut.android.jot.feature.excercise_create
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

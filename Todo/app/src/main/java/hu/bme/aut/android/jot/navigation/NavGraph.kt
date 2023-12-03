@@ -7,9 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import hu.bme.aut.android.jot.feature.todo_create.TodoCreateScreen
-import hu.bme.aut.android.jot.feature.todo_detail.TodoDetailScreen
-import hu.bme.aut.android.jot.feature.todo_list.TodoListScreen
+import hu.bme.aut.android.jot.feature.excercise_create.TodoCreateScreen
+import hu.bme.aut.android.jot.feature.excercise_detail.TodoDetailScreen
+import hu.bme.aut.android.jot.feature.excercise_list.TodoListScreen
 
 @Composable
 fun NavGraph(
