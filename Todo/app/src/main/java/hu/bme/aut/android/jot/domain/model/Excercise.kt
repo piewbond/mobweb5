@@ -5,7 +5,7 @@ import kotlinx.datetime.LocalDate
 data class Excercise(
     val id: Int,
     val title: String,
-    val priority: Priority,
+    val excerciseType: ExcerciseType,
     val dueDate: LocalDate,
     val description: String
 )

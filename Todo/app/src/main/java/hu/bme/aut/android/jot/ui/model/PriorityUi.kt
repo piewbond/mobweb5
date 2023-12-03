@@ -2,7 +2,7 @@ package hu.bme.aut.android.jot.ui.model
 
 import androidx.compose.ui.graphics.Color
 import hu.bme.aut.android.jot.R
-import hu.bme.aut.android.jot.domain.model.Priority
+import hu.bme.aut.android.jot.domain.model.ExcerciseType
 
 enum class PriorityUi(
     val title: Int,
@@ -19,15 +19,15 @@ enum class PriorityUi(
     )
 }
 
-fun PriorityUi.asPriority(): Priority {
+fun PriorityUi.asPriority(): ExcerciseType {
     return when(this) {
-        PriorityUi.Hypertrophy -> Priority.HYPERTROPHY
-        PriorityUi.Strength -> Priority.STRENGTH }
+        PriorityUi.Hypertrophy -> ExcerciseType.HYPERTROPHY
+        PriorityUi.Strength -> ExcerciseType.STRENGTH }
 }
 
-fun Priority.asPriorityUi(): PriorityUi {
+fun ExcerciseType.asPriorityUi(): PriorityUi {
     return when(this) {
-        Priority.HYPERTROPHY -> PriorityUi.Hypertrophy
-        Priority.STRENGTH -> PriorityUi.Strength
+        ExcerciseType.HYPERTROPHY -> PriorityUi.Hypertrophy
+        ExcerciseType.STRENGTH -> PriorityUi.Strength
     }
 }

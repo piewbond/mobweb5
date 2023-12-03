@@ -26,7 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hu.bme.aut.android.jot.R
-import hu.bme.aut.android.jot.domain.model.Priority
+import hu.bme.aut.android.jot.domain.model.ExcerciseType
 import hu.bme.aut.android.jot.ui.common.ExcerciseAppBar
 import hu.bme.aut.android.jot.ui.common.ExcerciseEditor
 import hu.bme.aut.android.jot.ui.model.asPriorityUi
@@ -94,7 +94,7 @@ fun TodoCreateScreen(
                 titleOnValueChange = { viewModel.onEvent(TodoCreateEvent.ChangeTitle(it)) },
                 descriptionValue = state.todo.description,
                 descriptionOnValueChange = { viewModel.onEvent(TodoCreateEvent.ChangeDescription(it)) },
-                priorities = Priority.values().map { it.asPriorityUi() },
+                priorities = ExcerciseType.values().map { it.asPriorityUi() },
                 selectedPriority = state.todo.priority,
                 onPrioritySelected = { viewModel.onEvent(TodoCreateEvent.SelectPriority(it)) },
                 modifier = Modifier.background(MaterialTheme.colorScheme.background),

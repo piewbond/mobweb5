@@ -20,7 +20,7 @@ data class ExcerciseUi(
 fun Excercise.asExcerciseUi(): ExcerciseUi = ExcerciseUi(
     id = id,
     title = title,
-    priority = priority.asPriorityUi(),
+    priority = excerciseType.asPriorityUi(),
     dueDate = dueDate.toString(),
     description = description
 )
@@ -28,7 +28,7 @@ fun Excercise.asExcerciseUi(): ExcerciseUi = ExcerciseUi(
 fun ExcerciseUi.asExcercise(): Excercise = Excercise(
     id = id,
     title = title,
-    priority = priority.asPriority(),
+    excerciseType = priority.asPriority(),
     dueDate = dueDate.toLocalDate(),
     description = description
 )
