@@ -6,10 +6,10 @@ import androidx.room.TypeConverters
 import hu.bme.aut.android.jot.data.converters.LocalDateConverter
 import hu.bme.aut.android.jot.data.converters.ExcercisePriorityConverter
 import hu.bme.aut.android.jot.data.dao.ExcerciseDao
-import hu.bme.aut.android.jot.data.entities.TodoEntity
+import hu.bme.aut.android.jot.data.entities.ExcerciseEntity
 
 //T93DFS
-@Database(entities = [TodoEntity::class], version = 1)
+@Database(entities = [ExcerciseEntity::class], version = 1)
 @TypeConverters(ExcercisePriorityConverter::class, LocalDateConverter::class)
 abstract class TodoDatabase : RoomDatabase() {
     abstract val dao: ExcerciseDao

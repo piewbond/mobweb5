@@ -7,7 +7,7 @@ import hu.bme.aut.android.jot.domain.model.Excercise
 import kotlinx.datetime.LocalDate
 
 @Entity(tableName = "excercise_table")
-data class TodoEntity(
+data class ExcerciseEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
     val priority: Priority,
@@ -15,7 +15,7 @@ data class TodoEntity(
     val description: String
 )
 
-fun TodoEntity.asTodo(): Excercise = Excercise(
+fun ExcerciseEntity.asExcercise(): Excercise = Excercise(
     id = id,
     title = title,
     priority = priority,
@@ -23,7 +23,7 @@ fun TodoEntity.asTodo(): Excercise = Excercise(
     description = description
 )
 
-fun Excercise.asTodoEntity(): TodoEntity = TodoEntity(
+fun Excercise.asExcerciseEntity(): ExcerciseEntity = ExcerciseEntity(
     id = id,
     title = title,
     priority = priority,
