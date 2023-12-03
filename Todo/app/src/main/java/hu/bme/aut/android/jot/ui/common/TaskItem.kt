@@ -55,7 +55,7 @@ fun TaskItem_Preview() {
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
-    val priorities = listOf(PriorityUi.Low, PriorityUi.Medium, PriorityUi.High)
+    val priorities = listOf(PriorityUi.Strength, PriorityUi.Hypertrophy)
     var selectedPriority by remember { mutableStateOf(priorities[0]) }
 
     val c = LocalDateTime.now()

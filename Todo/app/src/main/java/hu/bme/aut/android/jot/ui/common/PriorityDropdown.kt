@@ -133,7 +133,7 @@ fun PriorityDropDown(
 @Composable
 @Preview
 fun PriorityDropdown_Preview() {
-    val priorities = listOf(PriorityUi.Low, PriorityUi.Medium, PriorityUi.High)
+    val priorities = listOf(PriorityUi.Hypertrophy, PriorityUi.Strength)
     var selectedPriority by remember { mutableStateOf(priorities[0]) }
 
     Column(

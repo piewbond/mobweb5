@@ -22,10 +22,9 @@ object TodoPriorityConverter {
     @TypeConverter
     fun String.asPriority(): Priority {
         return when(this) {
-            Priority.LOW.name -> Priority.LOW
-            Priority.MEDIUM.name -> Priority.MEDIUM
-            Priority.HIGH.name -> Priority.HIGH
-            else -> Priority.LOW
+            Priority.STRENGTH.name -> Priority.STRENGTH
+            Priority.HYPERTROPHY.name -> Priority.HYPERTROPHY
+            else -> Priority.STRENGTH
         }
     }
 }

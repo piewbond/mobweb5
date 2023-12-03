@@ -46,7 +46,7 @@ fun ExcerciseEditor(
     descriptionValue: String,
     descriptionOnValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    priorities: List<PriorityUi> = listOf(PriorityUi.Low, PriorityUi.Medium, PriorityUi.High),
+    priorities: List<PriorityUi> = listOf(PriorityUi.Hypertrophy, PriorityUi.Strength),
     selectedPriority: PriorityUi,
     onPrioritySelected: (PriorityUi) -> Unit,
     onCreateTaskPressed: () -> Unit,
@@ -102,12 +102,13 @@ fun ExcerciseEditor(
             enabled = enabled,
             onClick = {
                 onCreateTaskPressed.invoke()
+                tasks.add(Task(title = "new abs",id = 0, weight = "54kg"))
+
             }
         ) {
             Icon(Icons.Default.AddCircle, contentDescription = null)
             Spacer(modifier = Modifier.width(10.dp))
             Text("Add new Task")
-            tasks.add(Task(title = "new abs",id = 0, weight = "54kg"))
         }
         Spacer(modifier = Modifier.height(5.dp))
         NormalTextField(
@@ -132,7 +133,7 @@ fun ExcerciseEditor_Preview() {
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
-    val priorities = listOf(PriorityUi.Low, PriorityUi.Medium, PriorityUi.High)
+    val priorities = listOf(PriorityUi.Hypertrophy, PriorityUi.Strength)
     var selectedPriority by remember { mutableStateOf(priorities[0]) }
 
     val c = LocalDateTime.now()

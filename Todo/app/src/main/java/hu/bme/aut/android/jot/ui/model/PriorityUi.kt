@@ -8,38 +8,26 @@ enum class PriorityUi(
     val title: Int,
     val color: Color
 ) {
-    None(
-        title =  R.string.priority_title_none,
-        color = Color(0xFFE6E4E4)
-    ),
-    Low(
+
+    Hypertrophy(
         title = R.string.priority_title_low,
         color = Color(0xFF8BC34A)
     ),
-    Medium(
+    Strength(
         title = R.string.priority_title_medium,
         color = Color(0xFFFFC107)
-    ),
-    High(
-        title = R.string.priority_title_high,
-        color = Color(0xFFF44336)
-    ),
+    )
 }
 
 fun PriorityUi.asPriority(): Priority {
     return when(this) {
-        PriorityUi.None -> Priority.NONE
-        PriorityUi.Low -> Priority.LOW
-        PriorityUi.Medium -> Priority.MEDIUM
-        PriorityUi.High -> Priority.HIGH
-    }
+        PriorityUi.Hypertrophy -> Priority.HYPERTROPHY
+        PriorityUi.Strength -> Priority.STRENGTH }
 }
 
 fun Priority.asPriorityUi(): PriorityUi {
     return when(this) {
-        Priority.NONE -> PriorityUi.None
-        Priority.LOW -> PriorityUi.Low
-        Priority.MEDIUM -> PriorityUi.Medium
-        Priority.HIGH -> PriorityUi.High
+        Priority.HYPERTROPHY -> PriorityUi.Hypertrophy
+        Priority.STRENGTH -> PriorityUi.Strength
     }
 }

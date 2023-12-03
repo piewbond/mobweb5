@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">JOT</string>
-    <string name="priority_title_low">low</string>
-    <string name="priority_title_medium">medium</string>
-    <string name="priority_title_high">high</string>
+    <string name="priority_title_low">Hypertrophy</string>
+    <string name="priority_title_medium">Strength</string>
     <string name="dialog_ok_button_text">Ok</string>
     <string name="dialog_dismiss_button_text">Close</string>
     <string name="textfield_label_title">Title</string>
@@ -15,7 +14,6 @@
     <string name="app_bar_title_list_excercise">JOT your exercises</string>
     <string name="app_bar_title_create_todo">Create excercise</string>
     <string name="some_error_message">Error</string>
-    <string name="priority_title_none">none</string>
     <string name="reminders_notification_channel_id">reminders_notification_channel_id</string>
     <string name="title_notification_reminder">It\'s time to excercise</string>
     <string name="description_notification_reminder">Don\'t forget to workout today!</string>

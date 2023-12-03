@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 data class ExcerciseUi(
     val id: Int = 0,
     val title: String = "",
-    val priority: PriorityUi = PriorityUi.None,
+    val priority: PriorityUi = PriorityUi.Hypertrophy,
     val dueDate: String = LocalDate(
         LocalDateTime.now().year,
         LocalDateTime.now().monthValue,
