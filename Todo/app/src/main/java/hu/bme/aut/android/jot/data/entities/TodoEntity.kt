@@ -6,7 +6,7 @@ import hu.bme.aut.android.jot.domain.model.Priority
 import hu.bme.aut.android.jot.domain.model.Excercise
 import kotlinx.datetime.LocalDate
 
-@Entity(tableName = "todo_table")
+@Entity(tableName = "excercise_table")
 data class TodoEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,

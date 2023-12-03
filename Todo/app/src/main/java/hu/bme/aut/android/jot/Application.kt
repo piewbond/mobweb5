@@ -32,7 +32,7 @@ class TodoApplication : Application() {
         db = Room.databaseBuilder(
             applicationContext,
             TodoDatabase::class.java,
-            "todo_database"
+            "excercise_database"
         ).fallbackToDestructiveMigration().build()
 
         repository = TodoRepositoryImpl(db.dao)
