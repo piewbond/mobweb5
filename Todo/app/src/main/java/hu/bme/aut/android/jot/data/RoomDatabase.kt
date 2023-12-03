@@ -11,6 +11,6 @@ import hu.bme.aut.android.jot.data.entities.ExcerciseEntity
 //T93DFS
 @Database(entities = [ExcerciseEntity::class], version = 1)
 @TypeConverters(ExcercisePriorityConverter::class, LocalDateConverter::class)
-abstract class TodoDatabase : RoomDatabase() {
+abstract class ExcerciseDatabase : RoomDatabase() {
     abstract val dao: ExcerciseDao
 }

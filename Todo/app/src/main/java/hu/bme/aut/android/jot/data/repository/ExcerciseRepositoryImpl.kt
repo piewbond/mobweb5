@@ -10,9 +10,9 @@ class ExcerciseRepositoryImpl(private val dao: ExcerciseDao) : ExcerciseReposito
 
     override fun getExcerciseById(id: Int): Flow<ExcerciseEntity> = dao.getExcerciseById(id)
 
-    override suspend fun insertExcercise(todo: ExcerciseEntity) { dao.insertExcercise(todo) }
+    override suspend fun insertExcercise(excercise: ExcerciseEntity) { dao.insertExcercise(excercise) }
 
-    override suspend fun updateExcercise(todo: ExcerciseEntity) { dao.updateExcercise(todo) }
+    override suspend fun updateExcercise(excercise: ExcerciseEntity) { dao.updateExcercise(excercise) }
 
     override suspend fun deleteExcercise(id: Int) { dao.deleteExcercise(id) }
 }

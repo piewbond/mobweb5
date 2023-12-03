@@ -7,14 +7,14 @@ import android.os.Build
 import android.preference.PreferenceManager
 import androidx.core.content.ContextCompat
 import androidx.room.Room
-import hu.bme.aut.android.jot.data.TodoDatabase
+import hu.bme.aut.android.jot.data.ExcerciseDatabase
 import hu.bme.aut.android.jot.data.repository.ExcerciseRepositoryImpl
 import hu.bme.aut.android.jot.notification.RemindersManager
 
 class TodoApplication : Application() {
 
     companion object {
-        private lateinit var db: TodoDatabase
+        private lateinit var db: ExcerciseDatabase
 
         lateinit var repository: ExcerciseRepositoryImpl
     }
@@ -31,7 +31,7 @@ class TodoApplication : Application() {
 
         db = Room.databaseBuilder(
             applicationContext,
-            TodoDatabase::class.java,
+            ExcerciseDatabase::class.java,
             "excercise_database"
         ).fallbackToDestructiveMigration().build()
 
