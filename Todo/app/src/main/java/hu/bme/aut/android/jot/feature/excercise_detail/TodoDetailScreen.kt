@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import hu.bme.aut.android.jot.ui.common.CreateTaskDialog
@@ -126,7 +127,7 @@ fun TodoDetailScreen(
                             )
                         }
                         Text(
-                            todo.description
+                            todo.description, fontSize = 30.sp
                         )
                         Button(
                             onClick = {
