@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import hu.bme.aut.android.jot.TodoApplication
-import hu.bme.aut.android.jot.domain.usecases.TodoUseCases
+import hu.bme.aut.android.jot.domain.usecases.ExcerciseUseCases
 import hu.bme.aut.android.jot.ui.model.ExcerciseUi
 import hu.bme.aut.android.jot.ui.model.asExcerciseUi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +20,7 @@ sealed class TodoListState {
 }
 
 class TodoListViewModel(
-    private val todoOperations: TodoUseCases
+    private val todoOperations: ExcerciseUseCases
 ) : ViewModel() {
     private val _state = MutableStateFlow<TodoListState>(TodoListState.Loading)
     val state = _state.asStateFlow()
@@ -29,7 +29,7 @@ class TodoListViewModel(
         viewModelScope.launch {
             try {
                 _state.value = TodoListState.Loading
-                val todos = todoOperations.loadTodos().getOrThrow().map { it.asExcerciseUi() }
+                val todos = todoOperations.loadExcercises().getOrThrow().map { it.asExcerciseUi() }
                 _state.value = TodoListState.Result(
                     todoList = todos
                 )
@@ -42,7 +42,7 @@ class TodoListViewModel(
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val todoOperations = TodoUseCases(TodoApplication.repository)
+                val todoOperations = ExcerciseUseCases(TodoApplication.repository)
                 TodoListViewModel(
                     todoOperations
                 )

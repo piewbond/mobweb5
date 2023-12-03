@@ -1,7 +1,5 @@
 package hu.bme.aut.android.jot.feature.excercise_detail
 
-import android.preference.PreferenceManager
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -11,7 +9,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import hu.bme.aut.android.jot.TodoApplication
 import hu.bme.aut.android.jot.domain.model.Excercise
-import hu.bme.aut.android.jot.domain.usecases.TodoUseCases
+import hu.bme.aut.android.jot.domain.usecases.ExcerciseUseCases
 import hu.bme.aut.android.jot.feature.excercise_create.TodoCreateUiEvent
 import hu.bme.aut.android.jot.ui.model.ExcerciseUi
 import hu.bme.aut.android.jot.ui.model.asExcerciseUi
@@ -29,7 +27,7 @@ sealed class TodoDetailState {
 }
 
 class TodoDetailViewModel(
-    private val todoOperations: TodoUseCases,
+    private val todoOperations: ExcerciseUseCases,
     private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
     private val _state = MutableStateFlow<TodoDetailState>(TodoDetailState.Loading)
@@ -47,7 +45,7 @@ class TodoDetailViewModel(
         viewModelScope.launch {
             try {
                 _state.value = TodoDetailState.Loading
-                val todo = todoOperations.loadTodo(id)
+                val todo = todoOperations.loadExcercise(id)
                 _state.value = TodoDetailState.Result(
                     todo = todo.getOrThrow().asExcerciseUi()
                 )
@@ -60,7 +58,7 @@ class TodoDetailViewModel(
         val id = checkNotNull<Int>(savedStateHandle["id"])
         viewModelScope.launch {
             try {
-                todoOperations.deleteTodo(id)
+                todoOperations.deleteExcercise(id)
                 _uiEvent.send(TodoCreateUiEvent.Success)
             } catch (e: Exception) {
                 _uiEvent.send(TodoCreateUiEvent.Failure(e.toUiText()))
@@ -71,7 +69,7 @@ class TodoDetailViewModel(
         val id = checkNotNull<Int>(savedStateHandle["id"])
         viewModelScope.launch {
             try {
-                todoOperations.updateTodo(excercise)
+                todoOperations.updateExcercise(excercise)
                 _uiEvent.send(TodoCreateUiEvent.Success)
             } catch (e: Exception) {
                 _uiEvent.send(TodoCreateUiEvent.Failure(e.toUiText()))
@@ -82,7 +80,7 @@ class TodoDetailViewModel(
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val todoOperations = TodoUseCases(TodoApplication.repository)
+                val todoOperations = ExcerciseUseCases(TodoApplication.repository)
                 val savedStateHandle = createSavedStateHandle()
                 TodoDetailViewModel(
                     todoOperations,

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import hu.bme.aut.android.jot.TodoApplication
-import hu.bme.aut.android.jot.domain.usecases.TodoUseCases
+import hu.bme.aut.android.jot.domain.usecases.ExcerciseUseCases
 import hu.bme.aut.android.jot.ui.model.PriorityUi
 import hu.bme.aut.android.jot.ui.model.ExcerciseUi
 import hu.bme.aut.android.jot.ui.model.UiText
@@ -38,7 +38,7 @@ sealed class TodoCreateEvent {
 }
 
 class TodoCreateViewModel(
-    private val todoOperations: TodoUseCases
+    private val todoOperations: ExcerciseUseCases
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(TodoCreateState())
@@ -82,7 +82,7 @@ class TodoCreateViewModel(
     private fun onSave() {
         viewModelScope.launch {
             try {
-                todoOperations.saveTodo(state.value.todo.asExcercise())
+                todoOperations.saveExcercise(state.value.todo.asExcercise())
                 _uiEvent.send(TodoCreateUiEvent.Success)
             } catch (e: Exception) {
                 _uiEvent.send(TodoCreateUiEvent.Failure(e.toUiText()))
@@ -93,7 +93,7 @@ class TodoCreateViewModel(
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val todoOperations = TodoUseCases(TodoApplication.repository)
+                val todoOperations = ExcerciseUseCases(TodoApplication.repository)
                 TodoCreateViewModel(
                     todoOperations = todoOperations
                 )
