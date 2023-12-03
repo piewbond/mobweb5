@@ -1,11 +1,11 @@
 package hu.bme.aut.android.jot.ui.model
 
-import hu.bme.aut.android.jot.domain.model.Todo
+import hu.bme.aut.android.jot.domain.model.Excercise
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toLocalDate
 import java.time.LocalDateTime
 
-data class TodoUi(
+data class ExcerciseUi(
     val id: Int = 0,
     val title: String = "",
     val priority: PriorityUi = PriorityUi.None,
@@ -17,7 +17,7 @@ data class TodoUi(
     val description: String = ""
 )
 
-fun Todo.asTodoUi(): TodoUi = TodoUi(
+fun Excercise.asExcerciseUi(): ExcerciseUi = ExcerciseUi(
     id = id,
     title = title,
     priority = priority.asPriorityUi(),
@@ -25,7 +25,7 @@ fun Todo.asTodoUi(): TodoUi = TodoUi(
     description = description
 )
 
-fun TodoUi.asTodo(): Todo = Todo(
+fun ExcerciseUi.asExcercise(): Excercise = Excercise(
     id = id,
     title = title,
     priority = priority.asPriority(),

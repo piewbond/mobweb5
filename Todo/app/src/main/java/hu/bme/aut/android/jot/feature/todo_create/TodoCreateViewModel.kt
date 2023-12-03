@@ -8,9 +8,9 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import hu.bme.aut.android.jot.TodoApplication
 import hu.bme.aut.android.jot.domain.usecases.TodoUseCases
 import hu.bme.aut.android.jot.ui.model.PriorityUi
-import hu.bme.aut.android.jot.ui.model.TodoUi
+import hu.bme.aut.android.jot.ui.model.ExcerciseUi
 import hu.bme.aut.android.jot.ui.model.UiText
-import hu.bme.aut.android.jot.ui.model.asTodo
+import hu.bme.aut.android.jot.ui.model.asExcercise
 import hu.bme.aut.android.jot.ui.model.toUiText
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 
 data class TodoCreateState(
-    val todo: TodoUi = TodoUi()
+    val todo: ExcerciseUi = ExcerciseUi()
 )
 
 sealed class TodoCreateUiEvent{
@@ -82,7 +82,7 @@ class TodoCreateViewModel(
     private fun onSave() {
         viewModelScope.launch {
             try {
-                todoOperations.saveTodo(state.value.todo.asTodo())
+                todoOperations.saveTodo(state.value.todo.asExcercise())
                 _uiEvent.send(TodoCreateUiEvent.Success)
             } catch (e: Exception) {
                 _uiEvent.send(TodoCreateUiEvent.Failure(e.toUiText()))

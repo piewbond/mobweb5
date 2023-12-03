@@ -27,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import hu.bme.aut.android.jot.feature.todo_list.TodoListState
 import hu.bme.aut.android.jot.notification.RemindersManager
 
 

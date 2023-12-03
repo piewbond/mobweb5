@@ -28,13 +28,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import hu.bme.aut.android.jot.R
 import hu.bme.aut.android.jot.domain.model.Priority
 import hu.bme.aut.android.jot.ui.common.CreateTaskDialog
-import hu.bme.aut.android.jot.ui.common.DatePickerDialog
-import hu.bme.aut.android.jot.ui.common.TodoAppBar
-import hu.bme.aut.android.jot.ui.common.TodoEditor
+import hu.bme.aut.android.jot.ui.common.ExcerciseAppBar
+import hu.bme.aut.android.jot.ui.common.ExcerciseEditor
 import hu.bme.aut.android.jot.ui.model.asPriorityUi
 import kotlinx.coroutines.launch
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.toLocalDate
 
 @Composable
 fun TodoCreateScreen(
@@ -70,7 +67,7 @@ fun TodoCreateScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(hostState) },
         topBar = {
-            TodoAppBar(
+            ExcerciseAppBar(
                 title = stringResource(id = R.string.app_bar_title_create_todo),
                 onNavigateBack = onNavigateBack,
                 onDelete = {}
@@ -93,7 +90,7 @@ fun TodoCreateScreen(
                 .padding(padding),
             contentAlignment = Alignment.Center
         ) {
-            TodoEditor(
+            ExcerciseEditor(
                 titleValue = state.todo.title,
                 titleOnValueChange = { viewModel.onEvent(TodoCreateEvent.ChangeTitle(it)) },
                 descriptionValue = state.todo.description,

@@ -31,7 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import hu.bme.aut.android.jot.ui.common.TodoAppBar
+import hu.bme.aut.android.jot.ui.common.ExcerciseAppBar
 import hu.bme.aut.android.jot.ui.model.toUiText
 
 
@@ -48,7 +48,7 @@ fun TodoDetailScreen(
     Scaffold(
         topBar = {
             if (state is TodoDetailState.Result) {
-                TodoAppBar(
+                ExcerciseAppBar(
 
                     title = state.todo.title,
                     onNavigateBack = onNavigateBack,

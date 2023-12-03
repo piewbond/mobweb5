@@ -16,14 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import hu.bme.aut.android.jot.domain.usecases.TodoUseCases
-import hu.bme.aut.android.jot.feature.todo_create.TodoCreateUiEvent
-import hu.bme.aut.android.jot.feature.todo_detail.TodoDetailViewModel
-import kotlinx.coroutines.channels.Channel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TodoAppBar(
+fun ExcerciseAppBar(
 
     modifier: Modifier = Modifier,
     title: String,
@@ -64,8 +60,8 @@ fun TodoAppBar(
 
 @Composable
 @Preview
-fun TodoAppBar_Preview() {
-    TodoAppBar(
+fun ExcerciseAppBar_Preview() {
+    ExcerciseAppBar(
         title = "Title",
         actions = {},
         onNavigateBack = {},

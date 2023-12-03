@@ -40,7 +40,7 @@ import java.time.LocalDateTime
 @SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun TodoEditor(
+fun ExcerciseEditor(
     titleValue: String,
     titleOnValueChange: (String) -> Unit,
     descriptionValue: String,
@@ -128,7 +128,7 @@ fun TodoEditor(
 
 @Composable
 @Preview(showBackground = true)
-fun TodoEditor_Preview() {
+fun ExcerciseEditor_Preview() {
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
@@ -139,7 +139,7 @@ fun TodoEditor_Preview() {
     val pickedDate by remember { mutableStateOf(LocalDate(c.year,c.month,c.dayOfMonth)) }
 
     Box(Modifier.fillMaxSize()) {
-        TodoEditor(
+        ExcerciseEditor(
             titleValue = title,
             titleOnValueChange = { title = it },
             descriptionValue = description,

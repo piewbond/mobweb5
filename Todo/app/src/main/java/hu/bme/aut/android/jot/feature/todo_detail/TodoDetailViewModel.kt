@@ -9,23 +9,20 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import hu.bme.aut.android.jot.TodoApplication
 import hu.bme.aut.android.jot.domain.usecases.TodoUseCases
-import hu.bme.aut.android.jot.feature.todo_create.TodoCreateEvent
 import hu.bme.aut.android.jot.feature.todo_create.TodoCreateUiEvent
-import hu.bme.aut.android.jot.ui.model.TodoUi
-import hu.bme.aut.android.jot.ui.model.asTodo
-import hu.bme.aut.android.jot.ui.model.asTodoUi
+import hu.bme.aut.android.jot.ui.model.ExcerciseUi
+import hu.bme.aut.android.jot.ui.model.asExcerciseUi
 import hu.bme.aut.android.jot.ui.model.toUiText
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 sealed class TodoDetailState {
     object Loading : TodoDetailState()
     data class Error(val error: Throwable) : TodoDetailState()
-    data class Result(val todo: TodoUi) : TodoDetailState()
+    data class Result(val todo: ExcerciseUi) : TodoDetailState()
 }
 
 class TodoDetailViewModel(
@@ -49,7 +46,7 @@ class TodoDetailViewModel(
                 _state.value = TodoDetailState.Loading
                 val todo = todoOperations.loadTodo(id)
                 _state.value = TodoDetailState.Result(
-                    todo = todo.getOrThrow().asTodoUi()
+                    todo = todo.getOrThrow().asExcerciseUi()
                 )
             } catch (e: Exception) {
                 _state.value = TodoDetailState.Error(e)
